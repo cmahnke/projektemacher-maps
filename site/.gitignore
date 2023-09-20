@@ -1,0 +1,5 @@
+node_modules
+dist
+.parcel-cache
+# Don't include this it makes the build platform dependent :(
+yarn.lock

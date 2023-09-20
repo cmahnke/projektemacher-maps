@@ -1,0 +1,19 @@
+body {
+    font-family: "Open Sans";
+}
+
+.contentWrapper {
+    position: relative;
+    height: calc(90vh - 1rem);
+    box-sizing: content-box;
+    overflow: hidden;
+
+    .map {
+        /* width: 100%; */
+        height: calc(100% - 1rem);
+        padding: 1rem;
+        position: relative;
+        box-sizing: content-box;
+        padding-bottom: 0;
+    }
+}
