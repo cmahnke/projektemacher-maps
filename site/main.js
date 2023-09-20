@@ -11,7 +11,7 @@ import {style} from "./style.js"
 const layer = new VectorTileLayer({
   source: new VectorTileSource({
     attributions: '&copy; OpenStreetMap contributors and Natural Earth',
-    maxZoom: 14,
+    maxZoom: 13,
     url: 'tiles/{z}/{x}/{y}.pbf',
     format: new MVT()
   }),
@@ -23,7 +23,7 @@ const map = new Map({
   ],
   target: 'map',
   view: new View({
-    center: [0, 0],
+    center: [9.93,51.55],
     zoom: 3,
   })
 });
