@@ -4,7 +4,7 @@ ARG COVERAGE=central-europe
 
 FROM --platform=linux/amd64 ghcr.io/cmahnke/map-action/data/${COVERAGE}:latest as data
 
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 
 ENV WEB_ROOT=/usr/share/nginx/html/
 
