@@ -24,5 +24,12 @@ body {
         width: 300px;
         overflow: scroll;
         padding: 1em;
+
+        .color {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.5em;
+            display: inline-block;
+        }
       }
 }

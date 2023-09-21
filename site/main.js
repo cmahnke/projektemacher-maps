@@ -25,10 +25,10 @@ const map = new Map({
   view: new View({
     center: [9.93,51.55],
     zoom: 3,
+    maxZoom: 13
   })
 });
 
 apply(map, style);
-
 
 export default map;
