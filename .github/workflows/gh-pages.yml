@@ -29,6 +29,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
 
+      - name: Setup deploy env
+        env:
+          DEPLOY_SSH_IDENTITY: ${{ secrets.DEPLOY_SSH_IDENTITY }}
+        run: |
+          mkdir -p ~/.ssh && echo "$DEPLOY_SSH_IDENTITY" >>  ~/.ssh/known_hosts
+
       - name: Extract
         run: |
           mkdir -p ./docs/
