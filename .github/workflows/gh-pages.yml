@@ -1,0 +1,50 @@
+name: Publish on GitHub pages
+
+on:
+  workflow_run:
+    workflows: ["Publish Docker images"]
+    branches: [main]
+    types:
+      - completed
+  schedule:
+    - cron:  '0 7 * * */2'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Free some disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
+
+    steps:
+      - name: Extract
+        run: |
+          mkdir -p ./docs/
+          docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+          docker create --name web ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+          docker cp web:/usr/share/nginx/html/. ./docs/
+          docker rm -f web
+          docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+
+      - name: Map directory upload and cleanup
+        env:
+          DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          SSHPASS: ${{ secrets.DEPLOY_PASS }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          cd docs
+          sshpass -e rsync -a --info=progress2 --size-only --delete --relative . $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/central-europe/

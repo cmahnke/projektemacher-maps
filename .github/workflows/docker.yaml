@@ -39,23 +39,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-
-  deploy_github_page:
-    name: Deploy on GitHub Pages
-    runs-on: ubuntu-latest
-    needs: [build_maps_viewer]
-    steps:
-      - name: Extract
-        run: |
-          mkdir -p ./docs/
-          docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker create --name web ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker cp web:/usr/share/nginx/html/. ./docs/
-          docker rm -f web
-          docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-      - name: Deploy site
-        uses: peaceiris/actions-gh-pages@v3.9.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          force_orphan: true
