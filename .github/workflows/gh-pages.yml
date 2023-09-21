@@ -29,7 +29,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
 
-    steps:
       - name: Extract
         run: |
           mkdir -p ./docs/
