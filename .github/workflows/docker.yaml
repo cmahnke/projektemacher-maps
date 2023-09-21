@@ -10,7 +10,7 @@ on:
 
 jobs:
   build_maps_viewer:
-    name: Push conversion-tools Docker image to GitHub Packages
+    name: Push Map Viewer Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -49,7 +49,7 @@ jobs:
           mkdir -p ./docs/
           docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
           docker create --name web ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker cp web:/usr/share/nginx/html/* ./docs/
+          docker cp web:/usr/share/nginx/html/. ./docs/
           docker rm -f web
           docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
       - name: Deploy site
