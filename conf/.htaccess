@@ -1,0 +1,4 @@
+<Files "*.pbf">
+  Header set Content-Encoding: gzip
+  Header set Cache-Control "max-age=63072000, public, no-transform"
+</Files>

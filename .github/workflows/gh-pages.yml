@@ -37,12 +37,28 @@ jobs:
 
       - name: Extract
         run: |
-          mkdir -p ./docs/
+          mkdir -p ./docs/central-europe/ ./docs/goettingen/ ./docs/sylt/
           docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker create --name web ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker cp web:/usr/share/nginx/html/. ./docs/
-          docker rm -f web
+          docker create --name central-europe ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+          docker cp central-europe:/usr/share/nginx/html/. ./docs/central-europe/
+          docker rm -f central-europe
           docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+
+          docker pull ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
+          docker create --name goettingen ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
+          docker cp goettingen:/data/. ./docs/goettingen/
+          docker rm -f goettingen
+          docker rmi ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
+
+          docker pull ghcr.io/cmahnke/map-action/data/sylt:latest:latest
+          docker create --name sylt ghcr.io/cmahnke/map-action/data/sylt:latest:latest
+          docker cp sylt:/data/. ./docs/sylt/
+          docker rm -f sylt
+          docker rmi ghcr.io/cmahnke/map-action/data/sylt:latest:latest
+
+      - name: Add config
+        run: |
+          cp conf/.htaccess ./docs/
 
       - name: Map directory upload and cleanup
         env:
@@ -52,4 +68,4 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           cd docs
-          sshpass -e rsync -a --info=progress2 --size-only --delete --relative . $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/central-europe/
+          sshpass -e rsync -a --info=progress2 --size-only --delete --relative . $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/maps/
