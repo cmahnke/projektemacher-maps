@@ -7,7 +7,7 @@ on:
     types:
       - completed
   schedule:
-    - cron:  '0 7 * * */2'
+    - cron:  '30 4 * * 2'
   workflow_dispatch:
 
 jobs:
@@ -69,4 +69,4 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           cd docs
-          sshpass -e rsync -a --info=progress2 --size-only --delete --relative . $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/maps/
+          sshpass -e rsync -a --info=progress2 --size-only --delete --relative . $DEPLOY_USER@$DEPLOY_SERVER:$DEPLOY_PATH/projektemacher.org/maps/
