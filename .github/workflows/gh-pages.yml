@@ -44,18 +44,18 @@ jobs:
           docker rm -f central-europe
           docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
 
-          docker pull ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
-          docker create --name goettingen ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
+          docker pull ghcr.io/cmahnke/map-action/data/goettingen:latest
+          docker create --name goettingen ghcr.io/cmahnke/map-action/data/goettingen:latest
           docker cp goettingen:/data/. ./docs/goettingen/
           docker rm -f goettingen
-          docker rmi ghcr.io/cmahnke/map-action/data/goettingen:latest:latest
+          docker rmi ghcr.io/cmahnke/map-action/data/goettingen:latest
 
-          docker pull ghcr.io/cmahnke/map-action/data/sylt:latest:latest
-          docker create --name sylt ghcr.io/cmahnke/map-action/data/sylt:latest:latest
+          docker pull ghcr.io/cmahnke/map-action/data/sylt:latest
+          docker create --name sylt ghcr.io/cmahnke/map-action/data/sylt:latest
           docker cp sylt:/data/. ./docs/sylt/
           docker rm -f sylt
-          docker rmi ghcr.io/cmahnke/map-action/data/sylt:latest:latest
-
+          docker rmi ghcr.io/cmahnke/map-action/data/sylt:latest
+          
       - name: Add config
         run: |
           cp conf/.htaccess ./docs/
