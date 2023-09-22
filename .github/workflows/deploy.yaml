@@ -1,4 +1,4 @@
-name: Publish on GitHub pages
+name: Publish Maps
 
 on:
   workflow_run:
@@ -8,6 +8,7 @@ on:
       - completed
   schedule:
     - cron:  '0 7 * * */2'
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -55,7 +56,7 @@ jobs:
           docker cp sylt:/data/. ./docs/sylt/
           docker rm -f sylt
           docker rmi ghcr.io/cmahnke/map-action/data/sylt:latest
-          
+
       - name: Add config
         run: |
           cp conf/.htaccess ./docs/
