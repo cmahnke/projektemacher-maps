@@ -4,7 +4,7 @@
 FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/central-europe:latest as central-europe
 FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/goettingen:latest as goettingen
 FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/sylt:latest as sylt
-FROM ghcr.io/cmahnke/projektemacher-maps/web:latest as web
+FROM ghcr.io/cmahnke/projektemacher-maps/viewer:latest as viewer
 
 FROM nginx:alpine
 
@@ -17,5 +17,5 @@ ENV DATA_DIR=/data \
 COPY --from=central-europe $DATA_DIR $WEB_ROOT/central-europe
 COPY --from=goettingen $DATA_DIR $WEB_ROOT/goettingen
 COPY --from=sylt $DATA_DIR $WEB_ROOT/sylt
-COPY --from=web $WEB_ROOT $WEB_ROOT/
+COPY --from=viewer $WEB_ROOT $WEB_ROOT/
 COPY conf/default.conf /etc/nginx/conf.d/

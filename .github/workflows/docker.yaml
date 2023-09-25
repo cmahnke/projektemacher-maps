@@ -70,4 +70,4 @@ jobs:
           file: docker/web/Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/cmahnke/projektemacher-maps:latest
+            ghcr.io/cmahnke/projektemacher-maps/viewer:latest
