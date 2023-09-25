@@ -73,12 +73,18 @@ jobs:
             ]
           servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
 
-      - uses: actions/delete-package-versions@v4
+      - uses: castlabs/delete-package-version-action@v1.0
         with:
-          package-name: org.openmaptiles.planetiler-openmaptiles
-          package-type: maven
-          min-versions-to-keep: 10
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ".*"
+          version: "3.14.0-PROJEKTEMACHER"
+          type: "maven"
+
+#      - uses: actions/delete-package-versions@v4
+#        with:
+#          package-name: org.openmaptiles.planetiler-openmaptiles
+#          package-type: maven
+#          min-versions-to-keep: 10
+#          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to Maven repository
         env:
