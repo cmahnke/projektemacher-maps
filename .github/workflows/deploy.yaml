@@ -38,15 +38,16 @@ jobs:
 
       - name: Extract central Europe
         run: |
-          mkdir -p ./docs/central-europe/ ./docs/goettingen/ ./docs/sylt/
-          docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker create --name central-europe ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
-          docker cp central-europe:/usr/share/nginx/html/. ./docs/central-europe/
+          mkdir -p ./docs/central-europe/
+          docker pull ghcr.io/cmahnke/map-data/central-europe:latest
+          docker create --name central-europe ghcr.io/cmahnke/map-data/central-europe:latest
+          docker cp central-europe:/data/. ./docs/central-europe/
           docker rm -f central-europe
-          docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+          docker rmi ghcr.io/cmahnke/map-data/central-europe:latest
 
       - name: Extract small datasets
         run: |
+          mkdir -p ./docs/goettingen/ ./docs/sylt/
           docker pull ghcr.io/cmahnke/map-data/goettingen:latest
           docker create --name goettingen ghcr.io/cmahnke/map-data/goettingen:latest
           docker cp goettingen:/data/. ./docs/goettingen/

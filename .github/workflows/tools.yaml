@@ -72,6 +72,13 @@ jobs:
               }
             ]
           servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
+
+      - name: Delete deployed artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X DELETE -u $GITHUB_TOKEN:$GITHUB_TOKEN  "https://maven.pkg.github.com/cmahnke/projektemacher-maps/org/openmaptiles/
+
       - name: Deploy to Maven repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
