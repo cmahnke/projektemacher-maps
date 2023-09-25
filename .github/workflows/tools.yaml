@@ -75,8 +75,8 @@ jobs:
 
       - uses: castlabs/delete-package-version-action@v1.0
         with:
-          name: ".*"
-          version: "3.14.0-PROJEKTEMACHER"
+          name: "^org.openmaptiles.planetiler-openmaptiles$"
+          version: ".*-PROJEKTEMACHER"
           type: "maven"
 
 #      - uses: actions/delete-package-versions@v4
