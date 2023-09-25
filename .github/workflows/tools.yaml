@@ -14,7 +14,6 @@ jobs:
   build_planetiler_openmaptiles:
     name: Push Maven dependency to GitHub Packages
     runs-on: ubuntu-latest
-    needs: [build_maps_viewer]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
