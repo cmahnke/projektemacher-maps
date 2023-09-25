@@ -62,7 +62,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.0.0
-      - name: Push to GitHub Packages
+      - name: Push Viewer to GitHub Packages
         uses: docker/build-push-action@v5.0.0
         with:
           push: true
@@ -71,6 +71,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/cmahnke/projektemacher-maps/viewer:latest
+      - name: Push Dev Viewer to GitHub Packages
         uses: docker/build-push-action@v5.0.0
         with:
           push: true
