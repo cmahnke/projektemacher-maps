@@ -4,13 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Projektemacher Maps Viewer</title>
-  <link rel="stylesheet" href="style.scss" type="text/css" />
-  <link rel="stylesheet" href="node_modules/ol/ol.css">
+  <link rel="stylesheet" href="assets/scss/style.scss" type="text/css" />
+  <link rel="stylesheet" href="ol/ol.css">
 </head>
 
 <body>
   <div class="contentWrapper">
     <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
     <div class="info">
       <h1>Projektemacher Maps debugger</h1>
       <p>
@@ -23,7 +27,7 @@
     </div>
   </div>
 
-  <script type="module" src="main.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
   <script>
     function dom(elem, attrs) {
       const element = document.createElement(elem);

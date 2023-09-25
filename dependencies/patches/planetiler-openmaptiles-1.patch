@@ -1,0 +1,37 @@
+diff --git a/pom.xml b/pom.xml
+index b21b1a2..161d084 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -22,7 +22,7 @@
+ 
+   <groupId>org.openmaptiles</groupId>
+   <artifactId>planetiler-openmaptiles</artifactId>
+-  <version>3.14.0</version>
++  <version>3.14.0-PROJEKTEMACHER</version>
+ 
+   <name>OpenMapTiles Vector Tile Schema implementation for Planetiler tool</name>
+ 
+diff --git a/src/main/java/org/openmaptiles/layers/Building.java b/src/main/java/org/openmaptiles/layers/Building.java
+index 49dc6b2..57034f7 100644
+--- a/src/main/java/org/openmaptiles/layers/Building.java
++++ b/src/main/java/org/openmaptiles/layers/Building.java
+@@ -166,6 +166,19 @@ public class Building implements
+         .setAttrWithMinzoom(Fields.RENDER_MIN_HEIGHT, renderMinHeight, 14)
+         .setAttrWithMinzoom(Fields.COLOUR, color, 14)
+         .setAttrWithMinzoom(Fields.HIDE_3D, hide3d, 14)
++
++        .setAttrWithMinzoom("building:architecture", element.source().getTag("building:architecture"), 14)
++        .setAttrWithMinzoom("building:architecture:wikidata", element.source().getTag("building:architecture"), 14)
++        .setAttrWithMinzoom("architect", element.source().getTag("architect"), 14)
++        .setAttrWithMinzoom("architect:wikidata", element.source().getTag("architect:wikidata"), 14)
++        .setAttrWithMinzoom("architect:wikipedia", element.source().getTag("architect:wikipedia"), 14)
++        .setAttrWithMinzoom("start_date", element.source().getTag("start_date"), 14)
++        .setAttrWithMinzoom("wikidata", element.source().getTag("wikidata"), 14)
++        .setAttrWithMinzoom("wikimedia_commons", element.source().getTag("wikimedia_commons"), 14)
++        .setAttrWithMinzoom("wikipedia", element.source().getTag("wikipedia"), 14)
++        .setAttrWithMinzoom("historic", element.source().getTag("historic"), 14)
++        .setAttrWithMinzoom("alt_name", element.source().getTag("alt_name"), 14)
++
+         .setSortKey(renderHeight);
+       if (mergeZ13Buildings) {
+         feature

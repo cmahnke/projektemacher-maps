@@ -1,0 +1,59 @@
+name: Publish Tool arctifacts
+
+permissions:
+  packages: write
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build_planetiler_openmaptiles:
+    name: Push Maven dependency to GitHub Packages
+    runs-on: ubuntu-latest
+    needs: [build_maps_viewer]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.0.0
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v5.0.0
+        with:
+          push: false
+          context: .
+          file: dependencies/Dockerfile
+          tags: |
+            ghcr.io/cmahnke/projektemacher-maps/planetiler-openmaptiles:latest
+      - name: Extract
+        run: |
+          mkdir -p ./docs/central-europe/ ./docs/goettingen/ ./docs/sylt/
+          docker create --name planetiler-openmaptiles ghcr.io/cmahnke/projektemacher-maps/planetiler-openmaptiles:latest
+          docker cp planetiler-openmaptiles:/opt/planetiler/. .
+          docker rm -f planetiler-openmaptiles
+          docker rmi ghcr.io/cmahnke/projektemacher-maps/planetiler-openmaptiles:latest
+      - name: Set Maven repository
+        uses: whelk-io/maven-settings-xml-action@v21
+        with:
+          repositories: '[{"id": "github", "url": "https://maven.pkg.github.com/cmahnke/projektemacher-maps", "snapshots.enabled": "true"},{"id": "central", "url": "https://repo1.maven.org/maven2"}]'
+          servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
+      - name: Deploy to Maven repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn org.apache.maven.plugins:maven-deploy-plugin:3.1.1:deploy-file \
+            -DrepositoryId=github -Dfile=planetiler-openmaptiles/3.14.0-PROJEKTEMACHER/planetiler-openmaptiles-3.14.0-PROJEKTEMACHER.jar -DgroupId=org.openmaptiles \
+            -DartifactId=planetiler-openmaptiles -Dversion3.14.0-PROJEKTEMACHER -Dpackaging=jar

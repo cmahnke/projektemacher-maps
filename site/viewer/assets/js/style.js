@@ -19,20 +19,22 @@ var layers = [
 
 export const style = {
   version: 8,
-  "ol:webfonts": "assets/fonts/{font-family}/{fontweight}{-fontstyle}.css",
+  "ol:webfonts": "assets/{font-family}/{fontweight}{-fontstyle}.css",
   metadata: {
     inspect: true,
   },
   sources: {
     vector_layer_: {
       type: "vector",
+
       tiles: [
-        "tiles/{z}/{x}/{y}.pbf",
+        "http://localhost:8080/central-europe/tiles/{z}/{x}/{y}.pbf",
       ],
+
       minzoom: 0,
-      maxzoom: 14,
+      maxzoom: 13,
       attribution:
-        'Style <a href="https://www.openmaptiles.org/" target="_blank">&copy; OpenMapTiles</a> &middot; Data <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        '&copy; OpenStreetMap contributors and Natural Earth',
     },
   },
   layers: [

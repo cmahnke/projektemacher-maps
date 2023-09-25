@@ -71,3 +71,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/cmahnke/projektemacher-maps/viewer:latest
+        uses: docker/build-push-action@v5.0.0
+        with:
+          push: true
+          context: .
+          file: docker/web/Dockerfile.dev
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ghcr.io/cmahnke/projektemacher-maps/viewer:dev

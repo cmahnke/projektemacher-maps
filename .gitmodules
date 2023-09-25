@@ -1,0 +1,3 @@
+[submodule "dependencies/planetiler-openmaptiles"]
+	path = dependencies/planetiler-openmaptiles
+	url = https://github.com/openmaptiles/planetiler-openmaptiles.git

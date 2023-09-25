@@ -6,14 +6,21 @@ services:
       context: .
     ports:
       - "5173:5173"
+      - "3010:3010"
     volumes:
-      - "./site/:/tmp/build/:rw"
+      - type: bind
+        source: ./site/viewer
+        target: /tmp/build/viewer
     depends_on:
       - data
+    command: ["yarn", "run", "vite", "viewer", "--debug", "--host"]
+
   data:
     image: ghcr.io/cmahnke/projektemacher-maps:latest
     build:
       dockerfile: ./docker/data/Dockerfile
       context: .
+    volumes:
+      - "./conf/default.conf:/etc/nginx/conf.d/default.conf:ro"
     ports:
       - "8080:80"

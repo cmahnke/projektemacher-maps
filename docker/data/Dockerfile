@@ -19,3 +19,5 @@ COPY --from=goettingen $DATA_DIR $WEB_ROOT/goettingen
 COPY --from=sylt $DATA_DIR $WEB_ROOT/sylt
 COPY --from=viewer $WEB_ROOT $WEB_ROOT/
 COPY conf/default.conf /etc/nginx/conf.d/
+
+EXPOSE 80
