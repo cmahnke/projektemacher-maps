@@ -74,6 +74,7 @@ jobs:
           servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
 
       - uses: actions/delete-package-versions@v4
+        continue-on-error: true
         with:
           package-name: org.openmaptiles.planetiler-openmaptiles
           package-type: maven
