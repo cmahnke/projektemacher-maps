@@ -36,7 +36,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh && echo "$DEPLOY_SSH_IDENTITY" >>  ~/.ssh/known_hosts
 
-      - name: Extract
+      - name: Extract central Europe
         run: |
           mkdir -p ./docs/central-europe/ ./docs/goettingen/ ./docs/sylt/
           docker pull ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
@@ -45,6 +45,8 @@ jobs:
           docker rm -f central-europe
           docker rmi ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
 
+      - name: Extract small datasets
+        run: |
           docker pull ghcr.io/cmahnke/map-data/goettingen:latest
           docker create --name goettingen ghcr.io/cmahnke/map-data/goettingen:latest
           docker cp goettingen:/data/. ./docs/goettingen/
