@@ -19,5 +19,5 @@ LABEL org.opencontainers.image.source https://github.com/cmahnke/map-data
 
 ENV WEB_ROOT=/usr/share/nginx/html/
 
-COPY --from=builder $WEB_ROOT/dist/ $WEB_ROOT/
+COPY --from=builder $WEB_ROOT/viewer/dist/. $WEB_ROOT/
 COPY conf/default.conf /etc/nginx/conf.d/

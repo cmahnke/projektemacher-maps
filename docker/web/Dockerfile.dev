@@ -5,19 +5,19 @@ FROM node:20-alpine as builder
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/map-data
 
-ENV BUILD_DIR=/tmp/build
+ENV WEB_ROOT=/usr/share/nginx/html/
 
 COPY conf/default.conf /etc/nginx/conf.d/
 
 RUN --mount=target=/mnt/build-context \
-    mkdir -p $BUILD_DIR && \
-    cd $BUILD_DIR && \
+    mkdir -p $WEB_ROOT && \
+    cd $WEB_ROOT && \
     npm install --global esbuild-wasm && \
-    cp -ra /mnt/build-context/site/. $BUILD_DIR && \
-    cd $BUILD_DIR && \
+    cp -ra /mnt/build-context/site/. $WEB_ROOT && \
+    cd $WEB_ROOT && \
     yarn install && \
     yarn run build
 
-WORKDIR $BUILD_DIR
+WORKDIR $WEB_ROOT
 
 CMD ["yarn", "run", "vite", "viewer", "--debug", "--host"]

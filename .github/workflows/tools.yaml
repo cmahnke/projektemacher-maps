@@ -32,7 +32,7 @@ jobs:
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v5.0.0
         with:
-          push: false
+          push: true
           context: .
           file: dependencies/Dockerfile
           tags: |
