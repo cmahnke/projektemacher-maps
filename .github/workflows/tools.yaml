@@ -78,13 +78,7 @@ jobs:
           package-name: org.openmaptiles.planetiler-openmaptiles
           package-type: maven
           min-versions-to-keep: 10
-          token: ${{ secrets.GITHUB_PAT }}
-
-      - name: Delete deployed artifact
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          curl -X DELETE -u $GITHUB_TOKEN:$GITHUB_TOKEN  "https://maven.pkg.github.com/cmahnke/projektemacher-maps/org/openmaptiles/planetiler-openmaptiles/3.14.0-PROJEKTEMACHER/planetiler-openmaptiles-3.14.0-PROJEKTEMACHER.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to Maven repository
         env:
