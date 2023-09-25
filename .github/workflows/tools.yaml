@@ -77,7 +77,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -X DELETE -u $GITHUB_TOKEN:$GITHUB_TOKEN  "https://maven.pkg.github.com/cmahnke/projektemacher-maps/org/openmaptiles/
+          curl -X DELETE -u $GITHUB_TOKEN:$GITHUB_TOKEN  "https://maven.pkg.github.com/cmahnke/projektemacher-maps/org/openmaptiles/"
 
       - name: Deploy to Maven repository
         env:
