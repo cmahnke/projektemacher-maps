@@ -2,11 +2,10 @@
 
 FROM maven:3-eclipse-temurin-17-focal AS builder
 
-ARG PLANETILER_TAG=main
-
 ENV BUILD_DEPS="git" \
     BUILD_DIR=/tmp/build \
     PLANETILER_GIT_URL=https://github.com/onthegomap/planetiler.git \
+    PLANETILER_TAG=main \
     PLANETILER_DIR=/opt/planetiler
 
 RUN --mount=target=/mnt/build-context \
