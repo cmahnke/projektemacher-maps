@@ -39,4 +39,4 @@ jobs:
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/cmahnke/projektemacher-maps/central-europe:latest
+            ghcr.io/cmahnke/projektemacher-maps:latest

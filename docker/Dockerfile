@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:experimental
 
-ARG COVERAGE=central-europe
 
-FROM --platform=linux/amd64 ghcr.io/cmahnke/map-action/data/${COVERAGE}:latest as data
+FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/central-europe:latest as central-europe
+FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/goettingen:latest as goettingen
+FROM --platform=linux/amd64 ghcr.io/cmahnke/map-data/sylt:latest as sylt
 
 FROM node:20-alpine as builder
 
@@ -24,6 +25,8 @@ LABEL org.opencontainers.image.source https://github.com/cmahnke/map-action
 ENV DATA_DIR=/data \
     WEB_ROOT=/usr/share/nginx/html/
 
-COPY --from=data $DATA_DIR $WEB_ROOT/
+COPY --from=central-europe $DATA_DIR $WEB_ROOT/central-europe
+COPY --from=goettingen $DATA_DIR $WEB_ROOT/goettingen
+COPY --from=sylt $DATA_DIR $WEB_ROOT/sylt
 COPY --from=builder $WEB_ROOT/dist/ $WEB_ROOT/
 COPY conf/default.conf /etc/nginx/conf.d/
