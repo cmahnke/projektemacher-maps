@@ -47,7 +47,30 @@ jobs:
       - name: Set Maven repository
         uses: whelk-io/maven-settings-xml-action@v21
         with:
-          repositories: '[{"id": "github", "url": "https://maven.pkg.github.com/cmahnke/projektemacher-maps", "snapshots.enabled": "true"},{"id": "central", "url": "https://repo1.maven.org/maven2"}]'
+          repositories: |
+            [
+              {
+                "id": "central",
+                "name": "Maven Central",
+                "url": "https://repo1.maven.org/maven2",
+                "releases": {
+                  "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              },
+              {
+                "id": "github",
+                "url": "https://maven.pkg.github.com/cmahnke/projektemacher-maps",
+                "releases": {
+                  "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              }
+            ]
           servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
       - name: Deploy to Maven repository
         env:
