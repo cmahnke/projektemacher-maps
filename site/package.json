@@ -16,5 +16,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build"
+  },
+  "overrides": {
+    "esbuild": "npm:esbuild-wasm@latest"
   }
 }
