@@ -21,6 +21,8 @@ updates:
     directory: "/docker/planetiler/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "maven"
   - package-ecosystem: "docker"
     directory: "/dependencies/"
     schedule:
