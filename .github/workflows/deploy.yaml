@@ -62,7 +62,9 @@ jobs:
 
       - name: Add config
         run: |
-          cp conf/.htaccess ./docs/
+          cp conf/.htaccess ./docs/central-europe
+          cp conf/.htaccess ./docs/goettingen
+          cp conf/.htaccess ./docs/sylt
 
       - name: Map directory upload and cleanup
         env:
