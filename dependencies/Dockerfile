@@ -13,7 +13,7 @@ RUN --mount=target=/mnt/build-context \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y $BUILD_DEPS $RUN_DEPS && \
     mkdir -p $BUILD_DIR $PLANETILER_DIR && \
-# Install Planetiler
+# Install Planetiler Openmaptiles
     cd $BUILD_DIR && \
     cp -r /mnt/build-context/dependencies/planetiler-openmaptiles . && \
     cp -r /mnt/build-context/dependencies/patches . && \
