@@ -25,7 +25,7 @@ const map = new Map({
     center: fromLonLat(center),
     projection: 'EPSG:3857',
     zoom: initialZoom,
-    maxZoom: 14
+    maxZoom: 15
   })
 });
 
