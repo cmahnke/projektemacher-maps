@@ -8,17 +8,20 @@ import olms from 'ol-mapbox-style';
 import apply from 'ol-mapbox-style';
 import 'normalize.css';
 import '@fontsource/open-sans';
+import {mapViewer} from './map-viewer.js'
 
 const prefix = 'http://localhost:8080/central-europe/tiles/'
 const layer_url = prefix + '{z}/{x}/{y}.pbf';
 
-import {style} from "./style.js"
+import {style} from "./map-style.js"
 
 style.sources.vector_layer_.tiles = [layer_url];
 
 const center = [9.93, 51.55]
 const initialZoom = 6;
 
+
+/*
 const map = new Map({
   target: 'map',
   view: new View({
@@ -35,6 +38,8 @@ map.addLayer(
     source: new TileDebug({'zDirection': 1, 'template': '{z}/{x}/{y}'}),
   })
 );
+*/
+const map = mapViewer('map', style, [], layer_url, undefined, center, initialZoom, 15);
 
 const container = document.getElementById('popup');
 const content = document.getElementById('popup-content');

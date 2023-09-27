@@ -7,8 +7,16 @@ on:
     types:
       - completed
   schedule:
-    - cron:  '30 4 * * 2'
+    - cron: '30 4 * * 2'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  packages: write
+  contents: write
 
 jobs:
   deploy:
