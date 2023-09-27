@@ -3,6 +3,7 @@ import checker from 'vite-plugin-checker'
 //import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default {
+  envPrefix: 'VITE_',
   root: 'viewer',
   plugins: [
     checker({

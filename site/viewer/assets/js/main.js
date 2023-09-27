@@ -2,21 +2,22 @@ import TileLayer from 'ol/layer/Tile.js';
 import {TileDebug} from 'ol/source.js';
 import Overlay from 'ol/Overlay.js';
 import {toLonLat, fromLonLat} from 'ol/proj.js';
-import 'ol/ol.css';
 import apply from 'ol-mapbox-style';
 import 'normalize.css';
 import '@fontsource/open-sans';
 import {mapViewer} from './map-viewer.js'
 
-const prefix = 'http://localhost:8080/central-europe/tiles/'
-const layer_url = prefix + '{z}/{x}/{y}.pbf';
-
+const layer_url = import.meta.env.VITE_TILE_URL;
 import {style} from "./map-style.js"
+
+console.log(`Loaded url ${layer_url} from env`);
 
 style.sources.vector_layer_.tiles = [layer_url];
 
 const center = [9.93, 51.55]
 const initialZoom = 6;
+
+const map = mapViewer('map', style, [], layer_url, undefined, center, initialZoom, 15);
 
 apply(map, style);
 map.addLayer(
@@ -24,8 +25,6 @@ map.addLayer(
     source: new TileDebug({'zDirection': 1, 'template': '{z}/{x}/{y}'}),
   })
 );
-
-const map = mapViewer('map', style, [], layer_url, undefined, center, initialZoom, 15);
 
 const container = document.getElementById('popup');
 const content = document.getElementById('popup-content');

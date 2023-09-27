@@ -16,8 +16,8 @@ RUN --mount=target=/mnt/build-context \
     cp -ra /mnt/build-context/site/. $WEB_ROOT && \
     cd $WEB_ROOT && \
     yarn install && \
-    yarn run build
+    yarn run --mode=development 
 
 WORKDIR $WEB_ROOT
 
-CMD ["yarn", "run", "vite", "viewer", "--debug", "--host"]
+CMD ["yarn", "run", "vite", "viewer", "--debug", "--host", "--mode=development"]

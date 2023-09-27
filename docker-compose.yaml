@@ -13,7 +13,7 @@ services:
         target: /tmp/build/viewer
     depends_on:
       - data
-    command: ["yarn", "run", "vite", "viewer", "--debug", "--host"]
+    command: ["yarn", "run", "vite", "viewer", "--debug", "--host", "--mode=development"]
 
   data:
     image: ghcr.io/cmahnke/projektemacher-maps:latest
