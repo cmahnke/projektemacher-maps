@@ -45,6 +45,7 @@ jobs:
           mkdir -p ~/.ssh && echo "$DEPLOY_SSH_IDENTITY" >>  ~/.ssh/known_hosts
 
       - name: Extract Frontend
+        run: |
           mkdir -p ./docs/
           docker pull ghcr.io/cmahnke/projektemacher-maps/viewer:latest
           docker create --name viewer ghcr.io/cmahnke/projektemacher-maps/viewer:latest

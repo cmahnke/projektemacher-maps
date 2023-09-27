@@ -36,8 +36,6 @@ export function mapViewer (elem, style, geoJson, source, bbox, center, initialZo
     maxZoom = 15;
   }
 
-
-
   var view;
 
   if (!checkMapboxStyle(style)) {
