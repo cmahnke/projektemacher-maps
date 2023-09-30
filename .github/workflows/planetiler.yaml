@@ -1,4 +1,4 @@
-name: Publish Docker images
+name: Publish Planetiler Docker images
 
 on:
   push:
