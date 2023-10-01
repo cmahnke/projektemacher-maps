@@ -27,54 +27,7 @@
   </div>
 
   <script type="module" src="assets/js/main.js"></script>
-  <script>
-    function dom(elem, attrs) {
-      const element = document.createElement(elem);
-      if (typeof attrs === "object") {
-        Object.keys(attrs).forEach((key) => (element[key] = attrs[key]));
-        const children = attrs.children;
-        if (Array.isArray(children)) {
-          children.forEach((child) => element.appendChild(child));
-        }
-      } else if (typeof attrs === "string") {
-        element.innerText = attrs;
-      }
-      return element;
-    }
 
-    var layers = [
-      // source name, r, g, b
-      ["water", 6, 204, 204],
-      ["water_name", 2, 44, 91],
-      ["waterway", 35, 117, 224],
-      ["landcover", 83, 224, 51],
-      ["landuse", 229, 180, 4],
-      ["park", 132, 234, 91],
-      ["boundary", 197, 69, 211],
-      ["aeroway", 81, 174, 181],
-      ["transportation", 242, 182, 72],
-      ["transportation_name", 188, 107, 56],
-      ["building", 43, 43, 43],
-      ["housenumber", 40, 40, 40],
-      ["place", 242, 14, 147],
-      ["mountain_peak", 98, 237, 247],
-      ["poi", 59, 181, 10],
-    ];
-    layers.forEach(([id, r, g, b]) => {
-      document.getElementById("layers").appendChild(
-        dom("div", {
-          className: "layer",
-          children: [
-            dom("div", {
-              className: "color",
-              style: `background-color:rgb(${r}, ${g}, ${b})`,
-            }),
-            dom("span", id),
-          ],
-        })
-      );
-    });
-  </script>
 </body>
 
 </html>

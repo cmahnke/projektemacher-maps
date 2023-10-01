@@ -1,7 +1,7 @@
 import TileLayer from 'ol/layer/Tile.js';
 import {TileDebug} from 'ol/source.js';
 import Overlay from 'ol/Overlay.js';
-import {toLonLat, fromLonLat} from 'ol/proj.js';
+import {toLonLat} from 'ol/proj.js';
 import apply from 'ol-mapbox-style';
 import 'normalize.css';
 import '@fontsource/open-sans';
@@ -72,7 +72,7 @@ map.on('pointermove', function (evt) {
         if (key != 'class' && key != 'layer') {
           info += lineTemplate(key + ':', value);
         }
-      };
+      }
 
     });
 
@@ -84,5 +84,30 @@ map.on('pointermove', function (evt) {
   console.groupEnd();
 });
 
+export var layers = [
+  // source name, r, g, b
+  ["water", 6, 204, 204],
+  ["water_name", 2, 44, 91],
+  ["waterway", 35, 117, 224],
+  ["landcover", 83, 224, 51],
+  ["landuse", 229, 180, 4],
+  ["park", 132, 234, 91],
+  ["boundary", 197, 69, 211],
+  ["aeroway", 81, 174, 181],
+  ["transportation", 242, 182, 72],
+  ["transportation_name", 188, 107, 56],
+  ["building", 43, 43, 43],
+  ["housenumber", 40, 40, 40],
+  ["place", 242, 14, 147],
+  ["mountain_peak", 98, 237, 247],
+  ["poi", 59, 181, 10],
+];
+layers.forEach(([id, r, g, b]) => {
+  document.getElementById("layers").insertAdjacentHTML('beforeend',
+
+    `<div class="layer"><div class="color" style="background-color: rgb(${r}, ${g}, ${b});"></div><span>${id}</span></div>`
+
+  );
+});
 
 export default map;
