@@ -5,6 +5,7 @@ import checker from 'vite-plugin-checker'
 export default {
   envPrefix: 'VITE_',
   root: 'viewer',
+  base: './',
   plugins: [
     checker({
       eslint: {
