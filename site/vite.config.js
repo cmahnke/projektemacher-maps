@@ -1,5 +1,4 @@
 // vite.config.js
-import checker from 'vite-plugin-checker'
 import eslint from 'vite-plugin-eslint';
 //import { viteStaticCopy } from 'vite-plugin-static-copy'
 
