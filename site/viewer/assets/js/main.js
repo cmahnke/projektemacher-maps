@@ -103,11 +103,17 @@ export var layers = [
   ["poi", 59, 181, 10],
 ];
 layers.forEach(([id, r, g, b]) => {
-  document.getElementById("layers").insertAdjacentHTML('beforeend',
+  var css = `background-color: rgb(${r}, ${g}, ${b});`;
+  var colorDiv = document.createElement('div');
+  colorDiv.setAttribute('style', css);
+  colorDiv.setAttribute('class', 'color');
+  var span = document.createElement('span');
+  span.appendChild(document.createTextNode(`${id}`));
+  var wrapper = document.createElement('div');
+  wrapper.appendChild(colorDiv);
+  wrapper.appendChild(span);
 
-    `<div class="layer"><div class="color" style="background-color: rgb(${r}, ${g}, ${b});"></div><span>${id}</span></div>`
-
-  );
+  document.getElementById("layers").appendChild(wrapper);
 });
 
 export default map;
