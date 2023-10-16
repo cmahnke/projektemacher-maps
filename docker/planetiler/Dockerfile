@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:experimental
 
-FROM maven:3-eclipse-temurin-17-focal AS builder
+FROM maven:3-eclipse-temurin-21 AS builder
 
 ENV BUILD_DEPS="git" \
     BUILD_DIR=/tmp/build \
@@ -29,12 +29,14 @@ FROM alpine:3.18
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/map-tools
 
-ENV RUN_DEPS="openjdk17-jre-headless" \
+ENV RUN_DEPS="temurin-21-jre" \
     PLANETILER_DIR=/opt/planetiler
 
 COPY --from=builder $PLANETILER_DIR/*with-deps.jar $PLANETILER_DIR/
 
-RUN apk --update upgrade && \
+RUN wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
+    echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
+    apk --update upgrade && \
     apk add --no-cache $RUN_DEPS && \
     mkdir -p $PLANETILER_DIR/bin && \
     printf "#!/bin/sh\njava -Xmx2g -jar /opt/planetiler/planetiler*-with-deps.jar" > /opt/planetiler/bin/planetiler && \
