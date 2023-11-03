@@ -10,8 +10,6 @@ ENV BUILD_DEPS="git" \
     PLANETILER_DIR=/opt/planetiler
 
 RUN --mount=target=/mnt/build-context \
-    wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
-    echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y $BUILD_DEPS $RUN_DEPS && \
     mkdir -p $BUILD_DIR $PLANETILER_DIR && \
