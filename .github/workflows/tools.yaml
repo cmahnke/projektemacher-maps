@@ -14,6 +14,9 @@ permissions:
   packages: write
   contents: write
 
+env:
+  PLANTILER_OPENMAPTILES_VERSION: 3.15.0
+
 jobs:
   build_planetiler_openmaptiles:
     name: Push Maven dependency to GitHub Packages
@@ -71,7 +74,7 @@ jobs:
                   "enabled": "true"
                 },
                 "snapshots": {
-                  "enabled": "false"
+                  "enabled": "true"
                 }
               }
             ]
@@ -90,6 +93,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mvn org.apache.maven.plugins:maven-deploy-plugin:3.1.1:deploy-file \
-            -DrepositoryId=github -Dfile=planetiler-openmaptiles/3.14.0-SNAPSHOT/planetiler-openmaptiles-3.14.0-SNAPSHOT.jar -DgroupId=org.openmaptiles \
+            -DrepositoryId=github -Dfile=planetiler-openmaptiles/3.15.0-SNAPSHOT/planetiler-openmaptiles-3.15.0-SNAPSHOT.jar -DgroupId=org.openmaptiles \
             -Durl=https://maven.pkg.github.com/cmahnke/projektemacher-maps \
-            -DartifactId=planetiler-openmaptiles -Dversion=3.14.0-SNAPSHOT -Dpackaging=jar
+            -DartifactId=planetiler-openmaptiles -Dversion=3.15.0-SNAPSHOT -Dpackaging=jar
