@@ -52,7 +52,7 @@ jobs:
           docker rm -f planetiler-openmaptiles
           docker rmi ghcr.io/cmahnke/projektemacher-maps/planetiler-openmaptiles:latest
       - name: Set Maven repository
-        uses: whelk-io/maven-settings-xml-action@v21
+        uses: whelk-io/maven-settings-xml-action@v22
         with:
           repositories: |
             [
