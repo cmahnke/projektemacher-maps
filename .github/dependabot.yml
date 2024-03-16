@@ -5,6 +5,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      github-actions:
+        patterns:
+        - '*'
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
@@ -13,19 +17,45 @@ updates:
     directory: "/site/"
     schedule:
       interval: "daily"
+    groups:
+      npm:
+        patterns:
+        - '*'
   - package-ecosystem: "docker"
     directory: "/docker/data/"
     schedule:
       interval: "daily"
+    groups:
+      docker:
+        patterns:
+        - '*'
   - package-ecosystem: "docker"
     directory: "/docker/planetiler/"
     schedule:
       interval: "daily"
     ignore:
       - dependency-name: "maven"
+    groups:
+      docker:
+        patterns:
+        - '*'
+  - package-ecosystem: "docker"
+    directory: "/docker/web/"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "maven"
+    groups:
+      docker:
+        patterns:
+        - '*'
   - package-ecosystem: "docker"
     directory: "/dependencies/"
     schedule:
       interval: "daily"
     ignore:
       - dependency-name: "maven"
+    groups:
+      docker:
+        patterns:
+        - '*'
