@@ -28,16 +28,16 @@ jobs:
           submodules: true
           fetch-depth: 0
       - name: Login to GitHub Packages Docker Registry
-        uses: docker/login-action@v3.0.0
+        uses: docker/login-action@v3.1.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.2.0
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v5.1.0
+        uses: docker/build-push-action@v5.3.0
         with:
           push: true
           context: .
@@ -52,7 +52,7 @@ jobs:
           docker rm -f planetiler-openmaptiles
           docker rmi ghcr.io/cmahnke/projektemacher-maps/planetiler-openmaptiles:latest
       - name: Set Maven repository
-        uses: whelk-io/maven-settings-xml-action@v21
+        uses: whelk-io/maven-settings-xml-action@v22
         with:
           repositories: |
             [
@@ -80,7 +80,7 @@ jobs:
             ]
           servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
 
-      - uses: actions/delete-package-versions@v4
+      - uses: actions/delete-package-versions@v5
         continue-on-error: true
         with:
           package-name: org.openmaptiles.planetiler-openmaptiles
