@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:experimental
 
-FROM maven:3-eclipse-temurin-21 AS builder
+FROM maven:3-eclipse-temurin-22 AS builder
 
 ENV BUILD_DEPS="git" \
     BUILD_DIR=/tmp/build \
@@ -29,7 +29,7 @@ FROM alpine:3.20
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/map-tools
 
-ENV RUN_DEPS="temurin-21-jre" \
+ENV RUN_DEPS="temurin-22-jre" \
     PLANETILER_DIR=/opt/planetiler
 
 COPY --from=builder $PLANETILER_DIR/*with-deps.jar $PLANETILER_DIR/
