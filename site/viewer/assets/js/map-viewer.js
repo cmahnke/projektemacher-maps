@@ -20,7 +20,7 @@ function checkMapboxStyle(style) {
 
 export function mapViewer (elem, style, geoJson, source, bbox, center, initialZoom, maxZoom) {
 
-  if (source !== undefined || source != '') {
+  if (source === undefined || source === '') {
     source = layer_url;
   }
   if (bbox === undefined || bbox == [] || bbox == '') {
@@ -47,7 +47,7 @@ export function mapViewer (elem, style, geoJson, source, bbox, center, initialZo
       extent: boundingExtent(bbox)
     });
   } else {
-    style.sources.vector_layer_.tiles = [layer_url];
+    style.sources.vector_layer_.tiles = [source];
     style.sources.vector_layer_.maxzoom = maxZoom;
     style.sources.vector_layer_.minzoom = 0;
     style.sources.vector_layer_.bounds = bbox.flat();

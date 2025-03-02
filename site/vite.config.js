@@ -6,6 +6,12 @@ export default {
   envPrefix: 'VITE_',
   root: 'viewer',
   base: './',
+  server: {
+    cors: false,
+    headers: {
+       'Access-Control-Allow-Origin': '*',
+     }
+  },
   plugins: [
     /*
     checker({
