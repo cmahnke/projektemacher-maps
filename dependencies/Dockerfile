@@ -1,7 +1,7 @@
 FROM maven:3-eclipse-temurin-21 AS builder
 
 LABEL maintainer="cmahnke@gmail.com"
-LABEL org.opencontainers.image.source https://github.com/cmahnke/map-tools
+LABEL org.opencontainers.image.source=https://github.com/cmahnke/map-tools
 
 ENV BUILD_DEPS="git" \
     BUILD_DIR=/tmp/build \

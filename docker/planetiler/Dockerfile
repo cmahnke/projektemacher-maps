@@ -21,7 +21,9 @@ RUN --mount=target=/mnt/build-context \
     rm -rf .git && \
     git apply --ignore-space-change --ignore-whitespace ../patches/planetiler-openmaptiles-*.patch && \
     cd .. && \
-    mvn -DskipTests=true clean install package && \
+    mvn -Dmaven.javadoc.skip=true -DskipTests=true clean install  && \
+    mvn -Dmaven.javadoc.skip=true -Dmaven.source.skip -DskipTests=true package && \
+    #mvn -DskipTests=true clean install package && \
     mv planetiler-dist/target/*with-deps.jar $PLANETILER_DIR
 
 FROM alpine:3.22
