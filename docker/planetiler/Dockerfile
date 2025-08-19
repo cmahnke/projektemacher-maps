@@ -24,12 +24,12 @@ RUN --mount=target=/mnt/build-context \
     mvn -DskipTests=true clean install package && \
     mv planetiler-dist/target/*with-deps.jar $PLANETILER_DIR
 
-FROM alpine:3.21
+FROM alpine:3.22
 
 LABEL maintainer="cmahnke@gmail.com"
 LABEL org.opencontainers.image.source https://github.com/cmahnke/map-tools
 
-ENV RUN_DEPS="temurin-22-jre" \
+ENV RUN_DEPS="temurin-23-jre" \
     PLANETILER_DIR=/opt/planetiler
 
 COPY --from=builder $PLANETILER_DIR/*with-deps.jar $PLANETILER_DIR/
