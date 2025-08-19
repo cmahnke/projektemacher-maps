@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:experimental
-
 FROM maven:3-eclipse-temurin-21 AS builder
 
 LABEL maintainer="cmahnke@gmail.com"
