@@ -3,7 +3,7 @@
   "dependencies": {
     "@fontsource/open-sans": "^5.0.12",
     "normalize.css": "^8.0.1",
-    "ol": "10.6.1",
+    "ol": "10.7.0",
     "ol-mapbox-style": "^13.0.1"
   },
   "devDependencies": {
