@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:experimental
 
-FROM node:24-alpine as builder
+FROM node:25-alpine as builder
 
 ENV WEB_ROOT=/usr/share/nginx/html/
 
